@@ -8,7 +8,7 @@ public interface UserService {
 
     void addUser(User user, String[] roles);
 
-    void updateUser(User user);
+    void updateUser(User user, String[] roles);
 
     void removeUser(int id);
 

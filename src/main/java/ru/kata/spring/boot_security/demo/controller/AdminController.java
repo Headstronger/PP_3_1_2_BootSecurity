@@ -34,9 +34,9 @@ public class AdminController {
 
     @PostMapping("/addUser")
     public String createUser(@ModelAttribute("user") User user,
-                             @RequestParam(value = "rolesList") String[] roles) {
+                             @RequestParam(value = "rolesList", required = false) String[] roles) {
         userService.addUser(user, roles);
-        return "redirect:/";
+        return "redirect:/admin";
     }
 
     @GetMapping("deleteUser/{id}")
@@ -53,9 +53,9 @@ public class AdminController {
     }
 
     @PostMapping("/updateUser")
-    public String updateUser(User user) {
-        userService.updateUser(user);
-        return "redirect:/";
+    public String updateUser(User user, @RequestParam(value = "rolesList", required = false) String[] roles) {
+        userService.updateUser(user, roles);
+        return "redirect:/admin";
     }
 
 }

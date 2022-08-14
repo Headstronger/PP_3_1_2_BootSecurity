@@ -30,18 +30,26 @@ public class UserServiceImp implements UserService, UserDetailsService {
     @Override
     @Transactional
     public void addUser(User user, String[] roles) {
-        HashSet<Role> roles1 = new HashSet<>();
-        for (String s : roles) {
-            roles1.add(roleDao.findByRole(s));
-        }
-        user.setRoles(roles1);
+        getRolesAndSet(user, roles);
         userDao.addUser(user);
     }
 
     @Override
     @Transactional
-    public void updateUser(User user) {
+    public void updateUser(User user, String[] roles) {
+        getRolesAndSet(user, roles);
         userDao.updateUser(user);
+    }
+
+    private void getRolesAndSet(User user, String[] roles) {
+        if (roles != null) {
+            HashSet<Role> roles1 = new HashSet<>();
+            for (String s : roles) {
+                roles1.add(roleDao.findByRole(s));
+                System.out.println(roleDao.findByRole(s));
+            }
+            user.setRoles(roles1);
+        }
     }
 
     @Override
