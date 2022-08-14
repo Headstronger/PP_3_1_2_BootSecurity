@@ -9,9 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.service.UserServiceImp;
 
-//@PreAuthorize("hasAuthority('admin')")
 @Controller
-//@RequestMapping("/admin")
+@RequestMapping("/admin")
 public class AdminController {
 
     private final UserServiceImp userService;
@@ -21,7 +20,7 @@ public class AdminController {
         this.userService = userService;
     }
 
-    @GetMapping("/")
+    @GetMapping
     public String getUserList(Model model) {
         model.addAttribute("users", userService.getListUsers());
         return "admin";
